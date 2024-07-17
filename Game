@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>街头跳跃</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+      font-family: 微软雅黑, sans-serif;
+    }
+
+    #game-container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    #character {
+      width: 50px;
+      height: 100px;
+      background-color: #333;
+      position: absolute;
+      bottom: 0;
+      left: 20px;
+    }
+
+    .obstacle {
+      width: 50px;
+      height: 50px;
+      background-color: #c00;
+      position: absolute;
+      bottom: 0;
+      animation: obstacle-move 3s linear infinite;
+    }
+
+    @keyframes obstacle-move {
+      0% { left: 100vw; }
+      100% { left: -50px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <div id="character"></div>
+    <div class="obstacle"></div>
+    <div class="obstacle" style="left: 30vw; animation-delay: 1s;"></div>
+    <div class="obstacle" style="left: 60vw; animation-delay: 2s;"></div>
+  </div>
+
+  <script>
+    const character = document.getElementById('character');
+    let isJumping = false;
+
+    document.addEventListener('keydown', (event) => {
+      if (event.code === 'Space' && !isJumping) {
+        isJumping = true;
+        character.style.bottom = '200px';
+        setTimeout(() => {
+          isJumping = false;
+          character.style.bottom = '0';
+        }, 500);
+      }
+    });
+  </script>
+</body>
+</html>
